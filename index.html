@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kanban Board</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <nav class="filters-row">
+    <div class="tag-filters">
+      <button class="tag active">Design</button>
+      <button class="tag">Front-end</button>
+      <button class="tag add-tag">＋</button>
+    </div>
+    <button class="add-task-btn">Add task</button>
+  </nav>
+
+  <main class="board-container">
+    <!-- To Do -->
+    <section class="board">
+      <div class="board-header todo">
+        <span class="color-indicator"></span>
+        <h2>To Do</h2>
+        <span class="count">12</span>
+        <button class="icon-btn">✎</button>
+      </div>
+
+      <div class="board-content">
+        <article class="task-card">
+          <h3>Adding new color tokens</h3>
+          <p>Define semantic color tokens for the design system.</p>
+          <div class="task-footer">
+            <span class="task-tag">Design</span>
+            <div class="task-actions">
+              <button>✎</button>
+              <button>🗑️</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-card">
+          <h3>Review Figma updates</h3>
+          <p>Audit the latest design changes.</p>
+          <div class="task-footer">
+            <span class="task-tag">Design</span>
+            <div class="task-actions">
+              <button>✎</button>
+              <button>🗑️</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- In Progress -->
+    <section class="board">
+      <div class="board-header in-progress">
+        <span class="color-indicator"></span>
+        <h2>In Progress</h2>
+        <span class="count">8</span>
+        <button class="icon-btn">✎</button>
+      </div>
+
+      <div class="board-content">
+        <article class="task-card">
+          <h3>Wireframe login page</h3>
+          <p>Create low-fidelity wireframes for auth screens.</p>
+          <div class="task-footer">
+            <span class="task-tag">UI</span>
+            <div class="task-actions">
+              <button>✎</button>
+              <button>🗑️</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Done -->
+    <section class="board">
+      <div class="board-header done">
+        <span class="color-indicator"></span>
+        <h2>Done</h2>
+        <span class="count">5</span>
+        <button class="icon-btn">✎</button>
+      </div>
+
+      <div class="board-content">
+        <article class="task-card">
+          <h3>Present form designs</h3>
+          <p>Final stakeholder review completed.</p>
+          <div class="task-footer">
+            <span class="task-tag">UX</span>
+            <div class="task-actions">
+              <button>✎</button>
+              <button>🗑️</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Add / Edit Task Modal (UI only) -->
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h2>Add / Edit Task</h2>
+      <label>
+        Title
+        <input type="text" placeholder="Task title" />
+      </label>
+      <label>
+        Description
+        <textarea placeholder="Task details"></textarea>
+      </label>
+      <label>
+        Tag
+        <select>
+          <option>Design</option>
+          <option>Front-end</option>
+        </select>
+      </label>
+      <div class="modal-actions">
+        <button class="secondary">Cancel</button>
+        <button class="primary">Save</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
