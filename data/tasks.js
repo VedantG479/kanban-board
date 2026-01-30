@@ -1,3 +1,4 @@
+import { renderTasks } from "../scripts/render-tasks.js";
 
 export const taskList = [{
     id: '34132fbwahr32q2',
@@ -30,3 +31,16 @@ export const taskList = [{
     tag: 'UX',
     progress:'done'
 }]
+
+export function addTask(task){
+    taskList.push({
+        id: createId(),
+        ...task,
+        progress: 'todo'
+    })
+    renderTasks()
+}
+
+function createId(){
+    return Date.now() + Math.random();
+}

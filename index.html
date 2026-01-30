@@ -17,7 +17,6 @@
   </nav>
 
   <main class="board-container">
-    <!-- To Do -->
     <section class="board js-todo-board">
       <div class="board-header todo">
         <span class="color-indicator"></span>
@@ -29,7 +28,6 @@
       </div>
     </section>
 
-    <!-- In Progress -->
     <section class="board js-in-progress-board">
       <div class="board-header in-progress">
         <span class="color-indicator"></span>
@@ -41,7 +39,6 @@
       </div>
     </section>
 
-    <!-- Done -->
     <section class="board js-done-board">
       <div class="board-header done">
         <span class="color-indicator"></span>
@@ -54,32 +51,31 @@
     </section>
 
   </main>
-
-  <!-- Add / Edit Task Modal (UI only) -->
-  <div class="modal-backdrop">
+ 
+  <div class="modal-backdrop hidden">
     <div class="modal">
       <h2>Add / Edit Task</h2>
       <label>
         Title
-        <input type="text" placeholder="Task title" />
+        <input type="text" placeholder="Task title" class="heading-modal"/>
       </label>
       <label>
         Description
-        <textarea placeholder="Task details"></textarea>
+        <textarea placeholder="Task details" class="desc-modal"></textarea>
       </label>
       <label>
         Tag
-        <select>
+        <select class="tag-modal">
           <option>Design</option>
           <option>Front-end</option>
         </select>
       </label>
       <div class="modal-actions">
-        <button class="secondary">Cancel</button>
-        <button class="primary">Save</button>
+        <button class="secondary discard-task">Discard</button>
+        <button class="primary save-task">Save</button>
       </div>
     </div>
   </div>
 </body>
-<script type="module" src="scripts/script.js"></script>
+<script type="module" src="script.js"></script>
 </html>

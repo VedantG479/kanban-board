@@ -1,4 +1,4 @@
-import { taskList } from "../../data/tasks.js"
+import { taskList } from "../data/tasks.js"
 
 const todoBoard = document.querySelector('.js-todo-board-content')
 const inProgressBoard = document.querySelector('.js-in-progress-board-content')
