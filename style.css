@@ -184,18 +184,6 @@ body {
   color: var(--text-secondary);
 }
 
-.icon-btn {
-  margin-left: auto;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.icon-btn:hover {
-  color: var(--text-primary);
-}
-
 /* ================= BOARD CONTENT ================= */
 
 .board-content {
