@@ -1,4 +1,4 @@
-import { addTask, editTask, getMatchingTask } from "../data/tasks.js"
+import { addTask, editTask, getMatchingTask } from "./data/tasks.js"
 
 const modalWindow = document.querySelector('.modal-backdrop')
 const modalWindowSaveBtn = document.querySelector('.save-task')
@@ -8,7 +8,7 @@ const modalWindowDesc = document.querySelector('.desc-modal')
 const modalWindowTag = document.querySelector('.tag-modal')
 let editingTaskId
 
-export function exportModal(){
+export function applyListenersModal(){
     modalWindowSaveBtn.addEventListener('click', () => {
         const heading = modalWindowHeading.value
         const details = modalWindowDesc.value

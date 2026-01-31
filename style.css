@@ -53,12 +53,20 @@ body {
   border-color: #dbe2ea;
 }
 
-/* Hover remove cross (optically centered) */
-.tag::after {
-  content: "×";
+.tag:hover {
+  background: #f3f4f6;
+}
+
+.tag.add-tag {
+  font-weight: 500;
+}
+
+/* ================= TAG REMOVE BUTTON ================= */
+
+.tag-remove {
   position: absolute;
 
-  /* optical anchor */
+  /* same optical anchor as before */
   top: 4px;
   right: 4px;
 
@@ -67,35 +75,28 @@ body {
   line-height: 1;
   color: #9ca3af;
 
-  /* this is the key part */
   background: var(--bg);
   padding: 1px 2px;
   border-radius: 4px;
 
   transform: translate(50%, -50%);
   opacity: 0;
-  pointer-events: none;
+
+  cursor: pointer;
+  user-select: none;
 
   transition: opacity 0.15s ease, color 0.15s ease;
 }
 
-.tag:hover::after {
+/* Show on hover */
+.tag:hover .tag-remove {
   opacity: 1;
   color: #374151;
 }
 
-
-.tag:hover {
-  background: #f3f4f6;
-}
-
 /* Never show cross on + Add Tag */
-.tag.add-tag::after {
+.tag.add-tag .tag-remove {
   display: none;
-}
-
-.tag.add-tag {
-  font-weight: 500;
 }
 
 /* ================= ADD TASK BUTTON ================= */
@@ -306,4 +307,45 @@ button.secondary {
   border: 1px solid var(--border);
   padding: 9px 16px;
   border-radius: 8px;
+}
+
+/* ================= NEW TAG INPUT ================= */
+
+.tag-input {
+  min-width: 80px;
+  max-width: 160px;
+
+  padding: 6px 12px;
+  font-size: 13px;
+
+  border-radius: 999px;
+  border: 1px dashed var(--border);
+  background: white;
+
+  color: var(--text-primary);
+  outline: none;
+
+  cursor: text;
+}
+
+/* Hide remove cross on input */
+.tag-input::after {
+  display: none;
+}
+
+/* Placeholder styling */
+.tag-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Focus state (subtle, professional) */
+.tag-input:focus {
+  border-style: solid;
+  border-color: #c7d2fe;
+  background: #ffffff;
+}
+
+/* Prevent ugly blue autofill on Chrome */
+.tag-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
 }

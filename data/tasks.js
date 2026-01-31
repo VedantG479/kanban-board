@@ -1,4 +1,4 @@
-import { renderTasks } from "../scripts/render-tasks.js";
+import { renderTasks } from "../render/render-tasks.js";
 
 export let taskList = [{
     id: '34132fbwahr32q2',
@@ -57,7 +57,7 @@ export function editTask(taskId, task){
     matchingTask.heading = heading
     matchingTask.details = details
     matchingTask.tag = tag
-    
+
     let newTaskList = taskList.map((task) => {
         if(task.id == taskId)   return matchingTask
         return task
