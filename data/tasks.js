@@ -1,6 +1,6 @@
 import { renderTasks } from "../scripts/render-tasks.js";
 
-export const taskList = [{
+export let taskList = [{
     id: '34132fbwahr32q2',
     heading: 'Adding new color tokens',
     details: 'Define semantic color tokens for the design system.',
@@ -10,25 +10,25 @@ export const taskList = [{
     id: '5235bjsfbu3442',
     heading: 'Wireframe login page',
     details: 'Create low-fidelity wireframes for auth screens.',
-    tag: 'UI',
+    tag: 'Design',
     progress:'in-progress'
 }, {
     id: '34235gjdfg935',
     heading: 'Present form designs',
     details: 'Final stakeholder review completed.',
-    tag: 'UX',
+    tag: 'Front-end',
     progress:'done'
 }, {
     id: 'gbeiwbt4fw3523',
     heading: 'Wireframe login page',
     details: 'Create low-fidelity wireframes for auth screens.',
-    tag: 'UI',
+    tag: 'Front-end',
     progress:'in-progress'
 }, {
     id: 'g4h64ehierh23',
     heading: 'Present form designs',
     details: 'Final stakeholder review completed.',
-    tag: 'UX',
+    tag: 'Design',
     progress:'done'
 }]
 
@@ -39,6 +39,44 @@ export function addTask(task){
         progress: 'todo'
     })
     renderTasks()
+}
+
+export function deleteTask(taskId){
+    let newTaskList = []
+    taskList.forEach((task) => {
+        if(task.id != taskId)   newTaskList.push(task)
+    })
+    taskList = newTaskList
+    renderTasks()
+}
+
+export function editTask(taskId, task){
+    let matchingTask = getMatchingTask(taskId)
+    const {heading, details, tag} = task
+
+    matchingTask.heading = heading
+    matchingTask.details = details
+    matchingTask.tag = tag
+    
+    let newTaskList = taskList.map((task) => {
+        if(task.id == taskId)   return matchingTask
+        return task
+    })
+    taskList = newTaskList
+    renderTasks()
+}
+
+export function changeProgress(taskId, newProgress){
+    //change progress
+    renderTasks()
+}
+
+export function getMatchingTask(taskId){
+    let matchingTask 
+    taskList.forEach((task) => {
+        if(task.id == taskId)   matchingTask = task
+    })
+    return matchingTask
 }
 
 function createId(){

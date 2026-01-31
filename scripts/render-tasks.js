@@ -22,8 +22,8 @@ export function renderTasks(){
                                     <div class="task-footer">
                                         <span class="task-tag">${tag}</span>
                                         <div class="task-actions">
-                                        <button data-task-id=${id}>✎</button>
-                                        <button data-task-id=${id}>🗑️</button>
+                                        <button class="edit-btn" data-task-id=${id}>✎</button>
+                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
                                         </div>
                                     </div>
                                 </article>`
@@ -36,8 +36,8 @@ export function renderTasks(){
                                     <div class="task-footer">
                                         <span class="task-tag">${tag}</span>
                                         <div class="task-actions">
-                                        <button data-task-id=${id}>✎</button>
-                                        <button data-task-id=${id}>🗑️</button>
+                                        <button class="edit-btn" data-task-id=${id}>✎</button>
+                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
                                         </div>
                                     </div>
                                 </article>`
@@ -50,8 +50,8 @@ export function renderTasks(){
                                     <div class="task-footer">
                                         <span class="task-tag">${tag}</span>
                                         <div class="task-actions">
-                                        <button data-task-id=${id}>✎</button>
-                                        <button data-task-id=${id}>🗑️</button>
+                                        <button class="edit-btn" data-task-id=${id}>✎</button>
+                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
                                         </div>
                                     </div>
                                 </article>`

@@ -1,4 +1,4 @@
-import { addTask } from "../data/tasks.js"
+import { addTask, editTask, getMatchingTask } from "../data/tasks.js"
 
 const modalWindow = document.querySelector('.modal-backdrop')
 const modalWindowSaveBtn = document.querySelector('.save-task')
@@ -6,6 +6,7 @@ const modalWindowDiscardBtn = document.querySelector('.discard-task')
 const modalWindowHeading = document.querySelector('.heading-modal')
 const modalWindowDesc = document.querySelector('.desc-modal')
 const modalWindowTag = document.querySelector('.tag-modal')
+let editingTaskId
 
 export function exportModal(){
     modalWindowSaveBtn.addEventListener('click', () => {
@@ -13,15 +14,31 @@ export function exportModal(){
         const details = modalWindowDesc.value
         const tag = modalWindowTag.value
 
-        console.log(heading, details, tag)
-        modalWindow.classList.toggle('hidden')  
         if((!heading || !heading.trim()) && (!details || !details.trim()))  return;
-        addTask({heading, details, tag})
+        if(editingTaskId){
+            editTask(editingTaskId, {heading, details, tag})
+            editingTaskId = null
+        }
+        else    addTask({heading, details, tag})
+
+        closeModal()
     })
 
     modalWindowDiscardBtn.addEventListener('click', () => {
-        modalWindowHeading.value = ''
-        modalWindowDesc.value = ''
-        modalWindow.classList.toggle('hidden')
+        closeModal()
     })
+}
+
+export function prefillModal(taskId){
+    editingTaskId = taskId
+    const {heading, details, tag} = getMatchingTask(taskId)
+    modalWindowHeading.value = heading
+    modalWindowDesc.value = details
+    modalWindowTag.value = tag
+}
+
+function closeModal(){
+    modalWindowHeading.value = ''
+    modalWindowDesc.value = ''
+    modalWindow.classList.toggle('hidden')
 }
