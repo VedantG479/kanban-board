@@ -19,7 +19,7 @@ export function renderTasks(){
             if(filter.topic == tag && filter.status){
                 if(progress == 'todo'){
                     countTodoContent++
-                    htmlTodoContent += `<article class="task-card js-task-card-${id}">
+                    htmlTodoContent += `<article class="task-card" draggable="true" data-id="${id}">
                                             <h3>${heading}</h3>
                                             <p>${details}</p>
                                             <div class="task-footer">
@@ -33,7 +33,7 @@ export function renderTasks(){
                 }
                 else if(progress == 'in-progress'){
                     countInProgressContent++
-                    htmlInProgressContent += `<article class="task-card js-task-card-${id}">
+                    htmlInProgressContent += `<article class="task-card" draggable="true" data-id="${id}">
                                             <h3>${heading}</h3>
                                             <p>${details}</p>
                                             <div class="task-footer">
@@ -47,7 +47,7 @@ export function renderTasks(){
                 }
                 else{
                     countDoneContent++
-                    htmlDoneContent += `<article class="task-card js-task-card-${id}">
+                    htmlDoneContent += `<article class="task-card" draggable="true" data-id="${id}">
                                             <h3>${heading}</h3>
                                             <p>${details}</p>
                                             <div class="task-footer">

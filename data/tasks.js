@@ -68,7 +68,9 @@ export function editTask(taskId, task){
 }
 
 export function changeProgress(taskId, newProgress){
-    //change progress
+    taskList.forEach((task) => {
+        if(task.id == taskId)   task.progress = newProgress
+    })
     renderTasks()
 }
 
