@@ -1,4 +1,4 @@
-import { removeFilter } from "./data/filters.js";
+import { removeFilter, toggleActive } from "./data/filters.js";
 import { deleteTask } from "./data/tasks.js";
 import { applyListenersModal, prefillModal } from "./modal.js";
 import { addFilterInputBox, saveFilter, renderFilters } from "./render/render-filters.js";
@@ -29,7 +29,8 @@ document.body.addEventListener('click', (e) => {
         addFilterInputBox()
     }
     else if(e.target.classList.contains('tag-filter')){
-        //filter selected
+        toggleActive(e.target.dataset.id)
+        renderTasks()
     }
     else if(e.target.classList.contains('task-card')){
         //drag - drop

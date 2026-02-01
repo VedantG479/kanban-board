@@ -48,13 +48,17 @@ body {
 }
 
 .tag.active {
-  background: #e9eef5;
+  background: #b8d2f5;
   color: var(--text-primary);
   border-color: #dbe2ea;
 }
 
 .tag:hover {
   background: #f3f4f6;
+}
+
+.tag.active:hover {
+  background: #c7d8f0;
 }
 
 .tag.add-tag {

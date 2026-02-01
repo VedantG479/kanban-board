@@ -1,4 +1,5 @@
 import { renderTasks } from "../render/render-tasks.js";
+import { createId } from "../utils.js";
 
 export let taskList = [{
     id: '34132fbwahr32q2',
@@ -77,8 +78,4 @@ export function getMatchingTask(taskId){
         if(task.id == taskId)   matchingTask = task
     })
     return matchingTask
-}
-
-function createId(){
-    return Date.now() + Math.random();
 }

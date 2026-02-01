@@ -1,3 +1,4 @@
+import { filtersList } from "../data/filters.js"
 import { taskList } from "../data/tasks.js"
 
 const todoBoard = document.querySelector('.js-todo-board-content')
@@ -14,48 +15,52 @@ export function renderTasks(){
 
     taskList.forEach((task) => {
         const {id, heading, details, tag, progress} = task
-        if(progress == 'todo'){
-            countTodoContent++
-            htmlTodoContent += `<article class="task-card js-task-card-${id}">
-                                    <h3>${heading}</h3>
-                                    <p>${details}</p>
-                                    <div class="task-footer">
-                                        <span class="task-tag">${tag}</span>
-                                        <div class="task-actions">
-                                        <button class="edit-btn" data-task-id=${id}>✎</button>
-                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                        </div>
-                                    </div>
-                                </article>`
-        }
-        else if(progress == 'in-progress'){
-            countInProgressContent++
-            htmlInProgressContent += `<article class="task-card js-task-card-${id}">
-                                    <h3>${heading}</h3>
-                                    <p>${details}</p>
-                                    <div class="task-footer">
-                                        <span class="task-tag">${tag}</span>
-                                        <div class="task-actions">
-                                        <button class="edit-btn" data-task-id=${id}>✎</button>
-                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                        </div>
-                                    </div>
-                                </article>`
-        }
-        else{
-            countDoneContent++
-            htmlDoneContent += `<article class="task-card js-task-card-${id}">
-                                    <h3>${heading}</h3>
-                                    <p>${details}</p>
-                                    <div class="task-footer">
-                                        <span class="task-tag">${tag}</span>
-                                        <div class="task-actions">
-                                        <button class="edit-btn" data-task-id=${id}>✎</button>
-                                        <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                        </div>
-                                    </div>
-                                </article>`
-        }
+        filtersList.forEach((filter) => {
+            if(filter.topic == tag && filter.status){
+                if(progress == 'todo'){
+                    countTodoContent++
+                    htmlTodoContent += `<article class="task-card js-task-card-${id}">
+                                            <h3>${heading}</h3>
+                                            <p>${details}</p>
+                                            <div class="task-footer">
+                                                <span class="task-tag">${tag}</span>
+                                                <div class="task-actions">
+                                                <button class="edit-btn" data-task-id=${id}>✎</button>
+                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
+                                                </div>
+                                            </div>
+                                        </article>`
+                }
+                else if(progress == 'in-progress'){
+                    countInProgressContent++
+                    htmlInProgressContent += `<article class="task-card js-task-card-${id}">
+                                            <h3>${heading}</h3>
+                                            <p>${details}</p>
+                                            <div class="task-footer">
+                                                <span class="task-tag">${tag}</span>
+                                                <div class="task-actions">
+                                                <button class="edit-btn" data-task-id=${id}>✎</button>
+                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
+                                                </div>
+                                            </div>
+                                        </article>`
+                }
+                else{
+                    countDoneContent++
+                    htmlDoneContent += `<article class="task-card js-task-card-${id}">
+                                            <h3>${heading}</h3>
+                                            <p>${details}</p>
+                                            <div class="task-footer">
+                                                <span class="task-tag">${tag}</span>
+                                                <div class="task-actions">
+                                                <button class="edit-btn" data-task-id=${id}>✎</button>
+                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
+                                                </div>
+                                            </div>
+                                        </article>`
+                }
+            }    
+        })
     })
 
     todoBoard.innerHTML = htmlTodoContent

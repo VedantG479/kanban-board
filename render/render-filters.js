@@ -7,9 +7,9 @@ let isGettingAdded = false
 export function renderFilters(){
     let filterTagHtmlContent = ''
     filtersList.forEach((filter) => {
-        filterTagHtmlContent += `<button class="tag tag-filter" data-id="${filter}">
-                                    ${filter}
-                                    <span class="tag-remove" data-id="${filter}">×</span>
+        filterTagHtmlContent += `<button class="tag tag-filter ${filter.status ? 'active' : ''}" data-id="${filter.id}">
+                                    ${filter.topic}
+                                    <span class="tag-remove" data-id="${filter.id}">×</span>
                                 </button>`
     })
     if(isGettingAdded){
