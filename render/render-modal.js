@@ -3,9 +3,11 @@ import { filtersList } from "../data/filters.js"
 const modalTagsBox = document.querySelector('.tag-modal')
 
 export function renderModal(){
-    let filtersHTML = ''
+    modalTagsBox.textContent = ''
     filtersList.forEach((filter) => {
-        filtersHTML += `<option data-id=${filter.id}>${filter.topic}</option>`
+        const option = document.createElement('option')
+        option.dataset.id = filter.id
+        option.textContent = filter.topic
+        modalTagsBox.appendChild(option)
     })
-    modalTagsBox.innerHTML = filtersHTML
 }

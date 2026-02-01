@@ -31,7 +31,6 @@ document.body.addEventListener('click', (e) => {
     }
     else if(e.target.classList.contains('tag-filter')){
         toggleActive(e.target.dataset.id)
-        renderTasks()
     }
     else if(e.target.classList.contains('tag-remove')){
         removeFilter(e.target.dataset.id) 

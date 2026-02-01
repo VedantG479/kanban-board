@@ -10,62 +10,71 @@ const inProgressBoardCount = document.querySelector('.js-in-progress-board .coun
 const doneBoardCount = document.querySelector('.js-done-board .count')
 
 export function renderTasks(){
-    let htmlTodoContent = '', htmlInProgressContent = '', htmlDoneContent = ''
-    let countTodoContent = 0, countInProgressContent = 0, countDoneContent = 0
+    todoBoard.textContent = ''
+    inProgressBoard.textContent = ''
+    doneBoard.textContent = ''
+
+    let countTodoContent = 0
+    let countInProgressContent = 0
+    let countDoneContent = 0
 
     taskList.forEach((task) => {
-        const {id, heading, details, tag, progress} = task
+        const { id, heading, details, tag, progress } = task
+
         filtersList.forEach((filter) => {
-            if(filter.topic == tag && filter.status){
-                if(progress == 'todo'){
+            if (filter.topic === tag && filter.status) {
+                const article = document.createElement('article')
+                article.className = 'task-card'
+                article.draggable = true
+                article.dataset.id = id
+
+                const h3 = document.createElement('h3')
+                h3.textContent = heading
+
+                const p = document.createElement('p')
+                p.textContent = details
+
+                const footer = document.createElement('div')
+                footer.className = 'task-footer'
+
+                if (tag !== 'No Tag') {
+                    const tagSpan = document.createElement('span')
+                    tagSpan.className = 'task-tag'
+                    tagSpan.textContent = tag
+                    footer.appendChild(tagSpan)
+                }
+
+                const actions = document.createElement('div')
+                actions.className = 'task-actions'
+
+                const editBtn = document.createElement('button')
+                editBtn.className = 'edit-btn'
+                editBtn.dataset.taskId = id
+                editBtn.textContent = '✎'
+
+                const deleteBtn = document.createElement('button')
+                deleteBtn.className = 'delete-btn'
+                deleteBtn.dataset.taskId = id
+                deleteBtn.textContent = '🗑️'
+
+                actions.append(editBtn, deleteBtn)
+                footer.appendChild(actions)
+
+                article.append(h3, p, footer)
+
+                if (progress === 'todo') {
                     countTodoContent++
-                    htmlTodoContent += `<article class="task-card" draggable="true" data-id="${id}">
-                                            <h3>${heading}</h3>
-                                            <p>${details}</p>
-                                            <div class="task-footer">
-                                                <span class="task-tag">${tag}</span>
-                                                <div class="task-actions">
-                                                <button class="edit-btn" data-task-id=${id}>✎</button>
-                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                                </div>
-                                            </div>
-                                        </article>`
-                }
-                else if(progress == 'in-progress'){
+                    todoBoard.appendChild(article)
+                } else if (progress === 'in-progress') {
                     countInProgressContent++
-                    htmlInProgressContent += `<article class="task-card" draggable="true" data-id="${id}">
-                                            <h3>${heading}</h3>
-                                            <p>${details}</p>
-                                            <div class="task-footer">
-                                                <span class="task-tag">${tag}</span>
-                                                <div class="task-actions">
-                                                <button class="edit-btn" data-task-id=${id}>✎</button>
-                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                                </div>
-                                            </div>
-                                        </article>`
-                }
-                else{
+                    inProgressBoard.appendChild(article)
+                } else {
                     countDoneContent++
-                    htmlDoneContent += `<article class="task-card" draggable="true" data-id="${id}">
-                                            <h3>${heading}</h3>
-                                            <p>${details}</p>
-                                            <div class="task-footer">
-                                                <span class="task-tag">${tag}</span>
-                                                <div class="task-actions">
-                                                <button class="edit-btn" data-task-id=${id}>✎</button>
-                                                <button class="delete-btn" data-task-id=${id}>🗑️</button>
-                                                </div>
-                                            </div>
-                                        </article>`
+                    doneBoard.appendChild(article)
                 }
-            }    
+            }
         })
     })
-
-    todoBoard.innerHTML = htmlTodoContent
-    inProgressBoard.innerHTML = htmlInProgressContent
-    doneBoard.innerHTML = htmlDoneContent
 
     todoBoardCount.innerText = countTodoContent
     inProgressBoardCount.innerText = countInProgressContent

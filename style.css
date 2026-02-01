@@ -241,7 +241,6 @@ body {
   color: var(--text-secondary);
   font-size: 13px;
   cursor: pointer;
-  margin-left: 6px;
 }
 
 .task-actions button:hover {

@@ -5,23 +5,41 @@ const tagFiltersDiv = document.querySelector('.tag-filters')
 let isGettingAdded = false
 
 export function renderFilters(){
-    let filterTagHtmlContent = ''
+    tagFiltersDiv.textContent = ''
+
     filtersList.forEach((filter) => {
-        filterTagHtmlContent += `<button class="tag tag-filter ${filter.status ? 'active' : ''}" data-id="${filter.id}">
-                                    ${filter.topic}
-                                    <span class="tag-remove" data-id="${filter.id}">×</span>
-                                </button>`
+        if (filter.topic !== 'No Tag') {
+            const button = document.createElement('button')
+            button.className = `tag tag-filter${filter.status ? ' active' : ''}`
+            button.dataset.id = filter.id
+
+            const textNode = document.createTextNode(filter.topic)
+            button.appendChild(textNode)
+
+            const removeSpan = document.createElement('span')
+            removeSpan.className = 'tag-remove'
+            removeSpan.dataset.id = filter.id
+            removeSpan.textContent = '×'
+
+            button.appendChild(removeSpan)
+            tagFiltersDiv.appendChild(button)
+        }
     })
-    if(isGettingAdded){
-        filterTagHtmlContent += `<input
-                                    type="text"
-                                    class="tag tag-input"
-                                    placeholder="New tag"
-                                    autofocus
-                                />`
+
+    if (isGettingAdded) {
+        const input = document.createElement('input')
+        input.type = 'text'
+        input.className = 'tag tag-input'
+        input.placeholder = 'New tag'
+        input.autofocus = true
+
+        tagFiltersDiv.appendChild(input)
     }
-    filterTagHtmlContent += `<button class="tag add-tag">＋</button>`
-    tagFiltersDiv.innerHTML = filterTagHtmlContent
+
+    const addTagButton = document.createElement('button')
+    addTagButton.className = 'tag add-tag'
+    addTagButton.textContent = '＋'
+    tagFiltersDiv.appendChild(addTagButton)
 
     renderModal()
 }

@@ -1,37 +1,7 @@
 import { renderTasks } from "../render/render-tasks.js";
 import { createId } from "../utils.js";
 
-export let taskList = [{
-    id: '34132fbwahr32q2',
-    heading: 'Adding new color tokens',
-    details: 'Define semantic color tokens for the design system.',
-    tag: 'Design',
-    progress:'todo'
-}, {
-    id: '5235bjsfbu3442',
-    heading: 'Wireframe login page',
-    details: 'Create low-fidelity wireframes for auth screens.',
-    tag: 'Design',
-    progress:'in-progress'
-}, {
-    id: '34235gjdfg935',
-    heading: 'Present form designs',
-    details: 'Final stakeholder review completed.',
-    tag: 'Front-end',
-    progress:'done'
-}, {
-    id: 'gbeiwbt4fw3523',
-    heading: 'Wireframe login page',
-    details: 'Create low-fidelity wireframes for auth screens.',
-    tag: 'Front-end',
-    progress:'in-progress'
-}, {
-    id: 'g4h64ehierh23',
-    heading: 'Present form designs',
-    details: 'Final stakeholder review completed.',
-    tag: 'Design',
-    progress:'done'
-}]
+export let taskList = JSON.parse(localStorage.getItem('taskList')) || []
 
 export function addTask(task){
     taskList.push({
@@ -39,7 +9,7 @@ export function addTask(task){
         ...task,
         progress: 'todo'
     })
-    renderTasks()
+    saveToStorage()
 }
 
 export function deleteTask(taskId){
@@ -48,7 +18,16 @@ export function deleteTask(taskId){
         if(task.id != taskId)   newTaskList.push(task)
     })
     taskList = newTaskList
-    renderTasks()
+    saveToStorage()
+}
+
+export function deleteAllTasks(filter){
+    let newTaskList = []
+    taskList.forEach((task) => {
+        if(task.tag != filter)  newTaskList.push(task)
+    })
+    taskList = newTaskList
+    saveToStorage()
 }
 
 export function editTask(taskId, task){
@@ -64,14 +43,14 @@ export function editTask(taskId, task){
         return task
     })
     taskList = newTaskList
-    renderTasks()
+    saveToStorage()
 }
 
 export function changeProgress(taskId, newProgress){
     taskList.forEach((task) => {
         if(task.id == taskId)   task.progress = newProgress
     })
-    renderTasks()
+    saveToStorage()
 }
 
 export function getMatchingTask(taskId){
@@ -80,4 +59,9 @@ export function getMatchingTask(taskId){
         if(task.id == taskId)   matchingTask = task
     })
     return matchingTask
+}
+
+function saveToStorage(){
+    localStorage.setItem('taskList', JSON.stringify(taskList))
+    renderTasks()
 }
