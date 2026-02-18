@@ -59,12 +59,12 @@ document.addEventListener('dragstart', (e) => {
 });
 
 document.addEventListener('dragover', (e) => {
-    cleanCSS(e)
+    if(!cleanCSS(e))    return
     closestBoard.classList.add('drag-over')
 });
 
 document.addEventListener('drop', (e) => {
-    cleanCSS(e)
+    if(!cleanCSS(e))    return
     changeProgress(draggedTask.dataset.id, closestBoard.dataset.statusId)
 });
 
@@ -81,7 +81,8 @@ function cleanCSS(e){
     if(prevClosestBoard)    prevClosestBoard.classList.remove('drag-over')
 
     closestBoard = e.target.closest('.board-content')
-    if(!closestBoard)   return
+    if(!closestBoard)   return false
 
     e.preventDefault()
+    return true
 }
