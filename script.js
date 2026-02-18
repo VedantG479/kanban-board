@@ -1,7 +1,8 @@
-import { removeFilter, toggleActive } from "./data/filters.js";
+import { addFilter, removeFilter, toggleActive } from "./data/filters.js";
 import { changeProgress, deleteTask } from "./data/tasks.js";
-import { applyListenersModal, prefillModal } from "./modal.js";
-import { addFilterInputBox, saveFilter, renderFilters } from "./render/render-filters.js";
+import { prefillModal } from "./modal.js";
+import { renderFilterInputBox, renderFilters } from "./render/render-filters.js";
+import { renderModal } from "./render/render-modal.js";
 import { renderTasks } from "./render/render-tasks.js";
 
 const addTaskBtn = document.querySelector('.add-task-btn')
@@ -11,14 +12,11 @@ let prevClosestBoard = null, closestBoard = null
 
 renderTasks()
 renderFilters()
-applyListenersModal()
-
-addTaskBtn.addEventListener('click', () => {
-    modalWindow.classList.toggle('hidden')
-})
+renderModal()
 
 document.body.addEventListener('click', (e) => {
-    if(e.target.classList.contains('edit-btn')){
+    if(e.target == addTaskBtn)   modalWindow.classList.toggle('hidden')
+    else if(e.target.classList.contains('edit-btn')){
         modalWindow.classList.toggle('hidden')
         prefillModal(e.target.dataset.taskId)
     }
@@ -27,7 +25,7 @@ document.body.addEventListener('click', (e) => {
     }
     else if(e.target.classList.contains('add-tag')){
         isAddingFilter = true
-        addFilterInputBox()
+        renderFilterInputBox()
     }
     else if(e.target.classList.contains('tag-filter')){
         toggleActive(e.target.dataset.id)
@@ -35,18 +33,23 @@ document.body.addEventListener('click', (e) => {
     else if(e.target.classList.contains('tag-remove')){
         removeFilter(e.target.dataset.id) 
     }
-    else if(isAddingFilter && !e.target.classList.contains('tag-input')){  
-        saveFilter()
-        isAddingFilter = false
-    }
+    else if(isAddingFilter && !e.target.classList.contains('tag-input'))    saveFilter()
 })
 
 document.body.addEventListener('keydown', (e) => {
-    if(e.key == 'Enter' && isAddingFilter){
-        saveFilter()
-        isAddingFilter = false
-    }
+    if(e.key == 'Enter' && isAddingFilter)  saveFilter()
 })
+
+function saveFilter(){
+    isAddingFilter = false
+    let inputFilter = document.querySelector('.tag-input').value
+    if(!inputFilter || !inputFilter.trim()){
+        renderFilters()
+        return
+    }
+    document.querySelector('.tag-input').value = ''
+    addFilter(inputFilter)
+}
 
 document.addEventListener('dragstart', (e) => {
     if (e.target.classList.contains('task-card')) {

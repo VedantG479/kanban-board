@@ -1,4 +1,5 @@
 import { renderFilters } from "../render/render-filters.js"
+import { renderModal } from "../render/render-modal.js"
 import { renderTasks } from "../render/render-tasks.js"
 import { createId } from "../utils.js"
 import { deleteAllTasks } from "./tasks.js"
@@ -41,4 +42,5 @@ function saveToStorage(){
     localStorage.setItem('filtersList', JSON.stringify(filtersList))
     renderFilters()
     renderTasks()
+    renderModal()
 }

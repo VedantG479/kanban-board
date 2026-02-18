@@ -8,26 +8,24 @@ const modalWindowDesc = document.querySelector('.desc-modal')
 const modalWindowTag = document.querySelector('.tag-modal')
 let editingTaskId
 
-export function applyListenersModal(){
-    modalWindowSaveBtn.addEventListener('click', () => {
-        const heading = modalWindowHeading.value
-        const details = modalWindowDesc.value
-        const tag = modalWindowTag.value
+modalWindowSaveBtn.addEventListener('click', () => {
+    const heading = modalWindowHeading.value
+    const details = modalWindowDesc.value
+    const tag = modalWindowTag.value
 
-        if((!heading || !heading.trim()) && (!details || !details.trim()))  return;
-        if(editingTaskId){
-            editTask(editingTaskId, {heading, details, tag})
-            editingTaskId = null
-        }
-        else    addTask({heading, details, tag})
+    if((!heading || !heading.trim()) && (!details || !details.trim()))  return;
+    if(editingTaskId){
+        editTask(editingTaskId, {heading, details, tag})
+        editingTaskId = null
+    }
+    else    addTask({heading, details, tag})
 
-        closeModal()
-    })
+    closeModal()
+})
 
-    modalWindowDiscardBtn.addEventListener('click', () => {
-        closeModal()
-    })
-}
+modalWindowDiscardBtn.addEventListener('click', () => {
+    closeModal()
+})
 
 export function prefillModal(taskId){
     editingTaskId = taskId

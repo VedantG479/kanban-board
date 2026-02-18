@@ -1,5 +1,5 @@
 import { filtersList } from "../data/filters.js"
-import { taskList } from "../data/tasks.js"
+import { filterTaskMap, taskList } from "../data/tasks.js"
 
 const todoBoard = document.querySelector('.js-todo-board-content')
 const inProgressBoard = document.querySelector('.js-in-progress-board-content')
@@ -10,6 +10,7 @@ const inProgressBoardCount = document.querySelector('.js-in-progress-board .coun
 const doneBoardCount = document.querySelector('.js-done-board .count')
 
 export function renderTasks(){
+    console.log(filterTaskMap)
     todoBoard.textContent = ''
     inProgressBoard.textContent = ''
     doneBoard.textContent = ''

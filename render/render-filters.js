@@ -1,8 +1,6 @@
-import { addFilter, filtersList } from "../data/filters.js";
-import { renderModal } from "./render-modal.js";
+import { filtersList } from "../data/filters.js";
 
 const tagFiltersDiv = document.querySelector('.tag-filters')
-let isGettingAdded = false
 
 export function renderFilters(){
     tagFiltersDiv.textContent = ''
@@ -26,37 +24,18 @@ export function renderFilters(){
         }
     })
 
-    if (isGettingAdded) {
-        const input = document.createElement('input')
-        input.type = 'text'
-        input.className = 'tag tag-input'
-        input.placeholder = 'New tag'
-        input.autofocus = true
-
-        tagFiltersDiv.appendChild(input)
-    }
-
     const addTagButton = document.createElement('button')
     addTagButton.className = 'tag add-tag'
     addTagButton.textContent = '＋'
     tagFiltersDiv.appendChild(addTagButton)
-
-    renderModal()
 }
 
-export function addFilterInputBox(){
-    isGettingAdded = true
-    renderFilters()
+export function renderFilterInputBox(){
+    const input = document.createElement('input')
+    input.type = 'text'
+    input.className = 'tag tag-input'
+    input.placeholder = 'New tag'
+    input.autofocus = true
+
+    tagFiltersDiv.appendChild(input)
 }
-
-export function saveFilter(){
-    let inputFilter = document.querySelector('.tag-input').value
-    isGettingAdded = false
-    if(!inputFilter || !inputFilter.trim()){
-        renderFilters()
-        return
-    }
-
-    document.querySelector('.tag-input').value = ''
-    addFilter(inputFilter)
-}   
