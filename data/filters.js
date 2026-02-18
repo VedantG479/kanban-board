@@ -9,6 +9,7 @@ export let filtersList = JSON.parse(localStorage.getItem('filtersList')) || [{
     topic: 'No Tag',
     status: true
 }]
+export let activeFilters = JSON.parse(localStorage.getItem('activeFilters')) || ["No Tag"]
 
 export function addFilter(filter){
     filtersList.push({
@@ -16,6 +17,7 @@ export function addFilter(filter){
         topic: filter, 
         status: true
     })
+    activeFilters.push(filter)
     saveToStorage()
 }
 
@@ -27,19 +29,36 @@ export function removeFilter(filterToRemove){
         else    filterDelete = filter.topic
     })
     filtersList = newFiltersList
+
+    activeFilters.forEach((filter, index) => {
+        if(filter == filterDelete)  activeFilters.splice(index, 1)
+    })
     deleteAllTasks(filterDelete)
     saveToStorage()
 }
 
 export function toggleActive(filterToToggle){
+    let filterToggle, status
     filtersList.forEach((filter) => {
-        if(filter.id == filterToToggle) filter.status = !filter.status
+        if(filter.id == filterToToggle){
+            filter.status = !filter.status
+            filterToggle = filter.topic
+            status = filter.status
+        }
     })
+
+    if(status)  activeFilters.push(filterToggle)
+    else{
+        activeFilters.forEach((filter, index) => {
+            if(filter == filterToggle)  activeFilters.splice(index, 1)
+        })
+    }
     saveToStorage()
 }
 
 function saveToStorage(){
     localStorage.setItem('filtersList', JSON.stringify(filtersList))
+    localStorage.setItem('activeFilters', JSON.stringify(activeFilters))
     renderFilters()
     renderTasks()
     renderModal()
